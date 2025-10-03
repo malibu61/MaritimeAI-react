@@ -1,5 +1,7 @@
-import {getAllShipsService, getShipsWZoom1Service} from "../services/ships";
+import {getShipsWZoom1Service} from "../services/ships";
 import React, {useEffect, useState} from "react";
+import {MapContainerComponent} from "../components/ships/map/Map";
+import {Card} from "antd"
 
 const Ships = () => {
 
@@ -19,29 +21,25 @@ const Ships = () => {
 
     return (
 
-        <>
+        <React.Fragment>
             <h1>ShipsPage</h1>
 
             {loading ? (
+                    <div>
+                        ...Yükleniyor...
+                    </div>
+                ) :
                 <div>
-                    ...Yükleniyor...
+                    <Card style={{height: '600px'}}>
+                        <MapContainerComponent ships={ships}/>
+                    </Card>
                 </div>
-            ) : ships.map((item, index) => {
-                return (
-                    <React.Fragment key={index}>
-
-                        <p>MMSI: {item.MMSI}</p>
-                        <p>Ad: {item.Name}</p>
-                        <p>Latitude: {item.Latitude}</p>
-                        <p>Longitude: {item.Longitude}</p>
-
-                    </React.Fragment>
-
-                )
-            })}
 
 
-        </>
+            }
+
+
+        </React.Fragment>
     )
 
 }
