@@ -1,19 +1,19 @@
 import React from 'react';
-import {MapContainer as LeafletMapContainer, Marker, TileLayer, Popup} from "react-leaflet"
+import {MapContainer as LeafletMapContainer, Marker, TileLayer, Popup, useMap} from "react-leaflet"
 import L from "leaflet"
 import 'leaflet/dist/leaflet.css';
 
 
 const shipIcon = L.divIcon({
-    html: '<div style="font-size: 30px;">🔴</div>',
+    html: '<div style="font-size: 12px">🔴</div>',
     className: 'custom-marker',
-    iconSize: [5, 5],
+    iconSize: [20, 20],
     iconAnchor: [10, 10]
 })
 
 export const MapContainerComponent = (props) => {
 
-    const {ships} = props
+    const {ships, markerRefs, mapRef} = props
 
     return (
 
@@ -21,9 +21,10 @@ export const MapContainerComponent = (props) => {
 
             <div style={{height: '100%', width: '100%'}}>
                 <LeafletMapContainer
-                    center={[41.0082, 28.9784]}
-                    zoom={7}
-                    style={{height: '550px', width: '100%'}}
+                    center={[39.0000, 34.0000]}
+                    zoom={6}
+                    style={{height: '600px', width: '100%'}}
+                    ref={mapRef}
                 >
 
                     <TileLayer
@@ -33,9 +34,12 @@ export const MapContainerComponent = (props) => {
 
                     {ships.map((ship, index) => (
                         <Marker
-                            key={index}
+                            key={ship.MMSI}
                             position={[ship.Latitude, ship.Longitude]}
                             icon={shipIcon}
+                            ref={data => {
+                                markerRefs.current[ship.MMSI] = data
+                            }}
 
                         >
 
@@ -54,7 +58,6 @@ export const MapContainerComponent = (props) => {
 
                         </Marker>
                     ))}
-
                 </LeafletMapContainer>
             </div>
         </React.Fragment>
