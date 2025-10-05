@@ -38,7 +38,9 @@ export const MapContainerComponent = (props) => {
                             position={[ship.Latitude, ship.Longitude]}
                             icon={shipIcon}
                             ref={data => {
+
                                 markerRefs.current[ship.MMSI] = data
+
                             }}
 
                         >
@@ -51,13 +53,14 @@ export const MapContainerComponent = (props) => {
                                     <p><strong>Enlem:</strong> {ship.Latitude} K</p>
                                     <p><strong>Boylam:</strong> {ship.Longitude} D</p>
                                     <p><strong>Sürat:</strong> {ship.Speed} KTS</p>
-                                    <p><strong>Rota:</strong> {ship.Course} </p>
+                                    <p><strong>Rota:</strong> {ship.Course}° </p>
                                 </div>
 
                             </Popup>
 
                         </Marker>
-                    ))}
+                    ))
+                    }
                 </LeafletMapContainer>
             </div>
         </React.Fragment>

@@ -1,7 +1,7 @@
 import {getShipsWZoom1Service} from "../services/ships";
 import React, {useEffect, useRef, useState} from "react";
 import {MapContainerComponent} from "../components/ships/map/Map";
-import {Card, Row, Col} from "antd"
+import {Card, Row, Col, Flex, Spin} from "antd"
 import ShipListComponent from "../components/ships/ShipsList";
 
 const Ships = () => {
@@ -14,11 +14,11 @@ const Ships = () => {
     const mapRef = useRef(null)
 
     const goToShip = (ship) => {
-        mapRef.current.flyTo([ship.Latitude, ship.Longitude], 12, {                // gemiye zoom yapma kısmı
-            duration: 3
+        mapRef.current.flyTo([ship.Latitude, ship.Longitude], 12, {               // gemiye zoom yapma kısmı
+            duration: 3                                                           //mapRef, haritanın referansını alır. ve işlemlerin hanngi haritada olacağına karar verir
         })
 
-        const marker = markerRefs.current[ship.MMSI]                                // pop-up'ı açtığımız kısım
+        const marker = markerRefs.current[ship.MMSI]                              // pop-up'ı açtığımız kısım
         marker.openPopup()
 
     }
@@ -31,7 +31,6 @@ const Ships = () => {
         getShipsWZoom1Service().then(response => {
             setShips(response);
             setLoading(false)
-            console.log(response)
         })
     }
 
@@ -45,7 +44,9 @@ const Ships = () => {
 
                 {loading ? (<Col span={24}>
                     <div>
-                        ...Yükleniyor...
+                        <Flex align="center" gap="middle">
+                            <Spin tip="Yükleniyor" size="large"/>
+                        </Flex>
                     </div>
                 </Col>) : <>
                     <Col span={16}>
