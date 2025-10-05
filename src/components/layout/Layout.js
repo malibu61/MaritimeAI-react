@@ -26,7 +26,7 @@ const Layout = ({children}) => {
         if (!collapseSider) {
             const timer = setTimeout(() => {
                 setShowTitle(true);
-            }, 100); // 1 saniye gecikme
+            }, 100);
 
             return () => clearTimeout(timer);
         } else {
@@ -53,7 +53,7 @@ const Layout = ({children}) => {
                 defaultCollapsed={false}
                 breakpoint="lg"
                 collapsed={collapseSider}       //state ekleyeceğiz
-                style={{height:"100vh"}}
+                style={{height: "100vh"}}
             >
                 <div style={{height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 
@@ -110,7 +110,6 @@ const Layout = ({children}) => {
                         ghost
                     />
 
-                    {/*<h1>Maritime AI Analiz Uygulaması</h1>*/}
                     <Title level={4} style={{margin: '0 0 0 16px', color: '#1890ff'}}>
                         Türkiye Çevresi Deniz Trafiği
                     </Title>

@@ -1,0 +1,81 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f172a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e293b;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="shipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circle -->
+  <circle cx="512" cy="512" r="512" fill="url(#bgGrad)"/>
+  
+  <!-- Decorative waves (bottom) -->
+  <path d="M 0 700 Q 128 650, 256 700 T 512 700 T 768 700 T 1024 700 L 1024 1024 L 0 1024 Z" 
+        fill="#1e3a8a" opacity="0.15"/>
+  <path d="M 0 750 Q 128 720, 256 750 T 512 750 T 768 750 T 1024 750 L 1024 1024 L 0 1024 Z" 
+        fill="#1e40af" opacity="0.1"/>
+  
+  <!-- Main ship icon (centered) -->
+  <g transform="translate(412, 280)">
+    <!-- Ship hull -->
+    <path d="M 20 80 L 100 20 L 180 80 L 165 120 L 35 120 Z" 
+          fill="url(#shipGrad)" stroke="#1e40af" stroke-width="6"/>
+    
+    <!-- Main sail -->
+    <path d="M 100 20 L 100 -60 L 150 10 Z" 
+          fill="#60a5fa" stroke="#3b82f6" stroke-width="4" filter="url(#glow)"/>
+    
+    <!-- Front sail -->
+    <path d="M 100 20 L 100 -40 L 60 0 Z" 
+          fill="#93c5fd" stroke="#60a5fa" stroke-width="3"/>
+    
+    <!-- Mast -->
+    <line x1="100" y1="-60" x2="100" y2="80" 
+          stroke="#1e40af" stroke-width="5"/>
+    
+    <!-- Wave under ship -->
+    <path d="M 0 120 Q 50 110, 100 120 T 200 120" 
+          fill="none" stroke="#3b82f6" stroke-width="4" opacity="0.6"/>
+  </g>
+  
+  <!-- MaritimeAI Text (birleşik) -->
+  <text x="512" y="580" font-family="'Helvetica Neue', Arial, sans-serif" 
+        font-size="95" font-weight="800" fill="#e2e8f0" text-anchor="middle">
+    Maritime<tspan fill="#3b82f6" filter="url(#glow)">AI</tspan>
+  </text>
+  
+  <!-- Subtitle (Türkçe) -->
+  <text x="512" y="680" font-family="Arial, sans-serif" 
+        font-size="30" fill="#94a3b8" text-anchor="middle" letter-spacing="3">
+    Yapay Zeka Destekli Denizcilik Çözümleri
+  </text>
+  
+  <!-- Decorative AI elements -->
+  <g opacity="0.4">
+    <circle cx="350" cy="600" r="3" fill="#3b82f6"/>
+    <circle cx="380" cy="620" r="2" fill="#60a5fa"/>
+    <circle cx="670" cy="600" r="3" fill="#3b82f6"/>
+    <circle cx="640" cy="620" r="2" fill="#60a5fa"/>
+  </g>
+  
+  <!-- Animated pulse -->
+  <circle cx="512" cy="150" r="8" fill="#3b82f6">
+    <animate attributeName="r" from="8" to="20" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" from="0.8" to="0" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="512" cy="150" r="6" fill="#60a5fa"/>
+</svg>
