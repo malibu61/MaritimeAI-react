@@ -1,5 +1,5 @@
 import {get} from "../helpers/api-helper"
-import {GET_SHIPS_WITH_ZOOM1, GET_ALL_SHIPS} from "../helpers/url-helper";
+import {GET_SHIPS_WITH_ZOOM1, GET_ALL_SHIPS, GET_ALL_SHIPS_WITH_SIGNALR} from "../helpers/url-helper";
 
 export const getAllShipsService = async (body) => {
 

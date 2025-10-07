@@ -1,4 +1,4 @@
-import {getShipsWZoom1Service} from "../services/ships";
+import {getShipsWZoom1Service, getAllShipsService, getAllShipsWSignalRService} from "../services/ships";
 import React, {useEffect, useRef, useState} from "react";
 import {MapContainerComponent} from "../components/ships/map/Map";
 import {Card, Row, Col, Flex, Spin} from "antd"
@@ -6,12 +6,11 @@ import ShipListComponent from "../components/ships/ShipsList";
 
 const Ships = () => {
 
-    const [ships, setShips] = useState(null)
+    const [ships, setShips] = useState([])
     const [loading, setLoading] = useState(true)
-
     const markerRefs = useRef({})
-
     const mapRef = useRef(null)
+
 
     const goToShip = (ship) => {
         mapRef.current.flyTo([ship.Latitude, ship.Longitude], 12, {               // gemiye zoom yapma kısmı
@@ -24,15 +23,24 @@ const Ships = () => {
     }
 
     useEffect(() => {
-        getShipsWZoom1()
-    }, [])
+        const eventSource = new EventSource("https://localhost:7170/api/Ships/GetShipsWZoom1");     //URL'i sürekli dinleme
 
-    const getShipsWZoom1 = () => {
-        getShipsWZoom1Service().then(response => {
-            setShips(response);
-            setLoading(false)
-        })
-    }
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+            setShips(data);
+            setLoading(false);
+            console.log("Yeni veri:", data);
+        };
+
+        eventSource.onerror = (err) => {
+            console.error("SSE hatası:", err);
+            eventSource.close();
+        };
+
+        return () => {
+            eventSource.close();
+        };
+    }, [])
 
     return (
 
@@ -44,8 +52,12 @@ const Ships = () => {
 
                 {loading ? (<Col span={24}>
                     <div>
-                        <Flex align="center" gap="middle">
-                            <Spin tip="Yükleniyor" size="large"/>
+                        <Flex align="center" justify="center" style={{width: "100%", minHeight: "650px"}}>
+                            <div style={{
+                                display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '650px'
+                            }}>
+                                <Spin tip="Yükleniyor" size="large"/>
+                            </div>
                         </Flex>
                     </div>
                 </Col>) : <>
