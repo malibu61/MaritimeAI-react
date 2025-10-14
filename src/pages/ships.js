@@ -23,23 +23,31 @@ const Ships = () => {
     }
 
     useEffect(() => {
-        const eventSource = new EventSource("https://localhost:7170/api/Ships/GetShipsWZoom1");     //URL'i sürekli dinleme
+        // const eventSource = new EventSource("https://localhost:7170/api/Ships/GetAllShipsStream");     //URL'i sürekli dinleme
+        //
+        // eventSource.onmessage = (event) => {
+        //     const data = JSON.parse(event.data);
+        //     setShips(data);
+        //     setLoading(false);
+        //     console.log("Yeni veri:", data);
+        // };
+        //
+        // eventSource.onerror = (err) => {
+        //     console.error("SSE hatası:", err);
+        //     eventSource.close();
+        // };
+        //
+        // return () => {
+        //     eventSource.close();
+        // };
 
-        eventSource.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            setShips(data);
-            setLoading(false);
-            console.log("Yeni veri:", data);
-        };
+        getAllShipsService().then((res) => {
+            setShips(res.Result)
+            setLoading(false)
+        })
 
-        eventSource.onerror = (err) => {
-            console.error("SSE hatası:", err);
-            eventSource.close();
-        };
 
-        return () => {
-            eventSource.close();
-        };
+
     }, [])
 
     return (
