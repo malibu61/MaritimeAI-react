@@ -11,7 +11,6 @@ const Ships = () => {
     const markerRefs = useRef({})
     const mapRef = useRef(null)
 
-
     const goToShip = (ship) => {
         mapRef.current.flyTo([ship.Latitude, ship.Longitude], 12, {               // gemiye zoom yapma kısmı
             duration: 3                                                           //mapRef, haritanın referansını alır. ve işlemlerin hanngi haritada olacağına karar verir
@@ -19,36 +18,26 @@ const Ships = () => {
 
         const marker = markerRefs.current[ship.MMSI]                              // pop-up'ı açtığımız kısım
         marker.openPopup()
-
     }
 
     useEffect(() => {
-        // const eventSource = new EventSource("https://localhost:7170/api/Ships/GetAllShipsStream");     //URL'i sürekli dinleme
-        //
-        // eventSource.onmessage = (event) => {
-        //     const data = JSON.parse(event.data);
-        //     setShips(data);
-        //     setLoading(false);
-        //     console.log("Yeni veri:", data);
-        // };
-        //
-        // eventSource.onerror = (err) => {
-        //     console.error("SSE hatası:", err);
-        //     eventSource.close();
-        // };
-        //
-        // return () => {
-        //     eventSource.close();
-        // };
+       getAllShips()
+    }, [])
 
-        getAllShipsService().then((res) => {
-            setShips(res.Result)
+    const getAllShips = () =>{
+        getAllShipsService({
+                minLat: 33.779147331286474,
+                maxLat: 44.008620115415354,
+                minLon: 23.64242583488468,
+                maxLon: 42.64877349113469,
+                zoom: 6
+        }).then((res) => {
+            console.log("res: ", res)
+            console.log("res: ", res.message)
+            setShips(res)
             setLoading(false)
         })
-
-
-
-    }, [])
+    }
 
     return (
 
@@ -73,6 +62,7 @@ const Ships = () => {
                         <Card style={{height: "650px"}}>
                             <MapContainerComponent
                                 ships={ships}
+                                setShips={setShips}
                                 markerRefs={markerRefs}
                                 mapRef={mapRef}/>
                         </Card>
