@@ -11,8 +11,6 @@ const ShipListComponent = (props) => {
         ship.Name.toLowerCase().includes(searchText.toLowerCase())
     )
 
-
-
     return (
         <React.Fragment>
 

@@ -10,6 +10,7 @@ import {logoutService} from "../../services/login"
 
 import {useLocation, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
+import GeneralAnalyze from "../../pages/generalanalyze";
 
 const {Title} = Typography;
 
@@ -88,6 +89,16 @@ const Layout = ({children}) => {
             label: "Gemiler"
         },
         {
+            key: "/generalanalyze",
+            icon: <ShopOutlined/>,
+            label: "Genel AI Analiz"
+        },
+        {
+            key: "/navtexanalyze",
+            icon: <ShopOutlined/>,
+            label: "NAVTEX AI Analiz"
+        },
+        {
             key: "/logout",
             icon: <LogoutOutlined/>,
             label: "Çıkış Yap"
@@ -96,14 +107,13 @@ const Layout = ({children}) => {
 
     return (
         <>
-        {contextHolder}
+            {contextHolder}
 
-            <AntLayout>
+            <AntLayout style={{ minHeight: '100vh' }}>
                 <Sider
-                    defaultCollapsed={false}
-                    breakpoint="lg"
-                    collapsed={collapseSider}       //state ekleyeceğiz
-                    style={{height: "100vh"}}
+                    collapsed={collapseSider}
+                    trigger={null}
+                    style={{ height: "100vh", position: "fixed", overflow: "auto" }}
                 >
                     <div style={{height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 
@@ -140,14 +150,21 @@ const Layout = ({children}) => {
 
                 </Sider>
 
-                <AntLayout>
+                <AntLayout style={{
+                    marginLeft: collapseSider ? 80 : 200,
+                    minHeight: '100vh'
+                }}>>
                     <Header
                         style={{
                             padding: '0 24px',
+                            marginTop:-20,
                             background: '#fff',
                             display: 'flex',
                             alignItems: 'center',
-                            borderBottom: '1px solid #f0f0f0'
+                            borderBottom: '1px solid #f0f0f0',
+                            position: 'sticky',
+                            top: 0,
+                            zIndex: 1
                         }}
                     >
                         <Button

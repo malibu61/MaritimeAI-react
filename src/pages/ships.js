@@ -1,8 +1,9 @@
-import {getShipsWZoom1Service, getAllShipsService, getAllShipsWSignalRService} from "../services/ships";
+import {getAllShipsService} from "../services/ships";
 import React, {useEffect, useRef, useState} from "react";
 import {MapContainerComponent} from "../components/ships/map/Map";
-import {Card, Row, Col, Flex, Spin} from "antd"
+import {Card, Col, Flex, Row} from "antd"
 import ShipListComponent from "../components/ships/ShipsList";
+import MaritimeLogo from "../../src/logo/maritime-ai-small-icon-logo.svg"
 
 const Ships = () => {
 
@@ -21,27 +22,40 @@ const Ships = () => {
     }
 
     useEffect(() => {
-       getAllShips()
+        getAllShips()
     }, [])
 
-    const getAllShips = () =>{
+    const getAllShips = () => {
         getAllShipsService({
-                minLat: 33.779147331286474,
-                maxLat: 44.008620115415354,
-                minLon: 23.64242583488468,
-                maxLon: 42.64877349113469,
-                zoom: 6
+            minLat: 33.779147331286474,
+            maxLat: 44.008620115415354,
+            minLon: 23.64242583488468,
+            maxLon: 42.64877349113469,
+            zoom: 6
         }).then((res) => {
-            console.log("res: ", res)
-            console.log("res: ", res.message)
             setShips(res)
             setLoading(false)
         })
     }
 
+    const IconSpinner = () => (
+        <div style={{
+            animation: 'spin 5s linear infinite',
+            display: 'inline-block'
+        }}>
+            <img src={MaritimeLogo} alt="MaritimeAI" style={{width: '100px'}}/>
+        </div>
+    );
+
     return (
 
         <React.Fragment>
+            <style>{`
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+            `}</style>
 
 
             <Row gutter={16} style={{margin: 30}}>
@@ -51,9 +65,17 @@ const Ships = () => {
                     <div>
                         <Flex align="center" justify="center" style={{width: "100%", minHeight: "650px"}}>
                             <div style={{
-                                display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '650px'
+                                display: 'flex',
+                                flexDirection: 'column',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                                minHeight: 300,
+                                gap: 16
                             }}>
-                                <Spin tip="Yükleniyor" size="large"/>
+                                <IconSpinner/>
+                                <div style={{color: '#1890ff', fontSize: 16}}>
+                                    Harita yükleniyor...
+                                </div>
                             </div>
                         </Flex>
                     </div>

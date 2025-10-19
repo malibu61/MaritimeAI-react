@@ -3,17 +3,17 @@ import {MapContainer as LeafletMapContainer, Marker, TileLayer, Popup, useMapEve
 import L from "leaflet"
 import 'leaflet/dist/leaflet.css';
 import { getAllShipsService} from "../../../services/ships";
+import {SHIP_TYPE_ICONS} from "../../../helpers/ship-type-colors-helper"
 
-
-
-
-
-const shipIcon = L.divIcon({
-    html: '<div style="font-size: 9px">🔴</div>',
-    className: 'custom-marker',
-    iconSize: [20, 20],
-    iconAnchor: [10, 10]
-})
+const shipIcon = (shipType) => {
+    const emoji = SHIP_TYPE_ICONS[shipType] || '🟤';
+    return L.divIcon({
+        html: `<div style="font-size: 9px">${emoji}</div>`,
+        className: 'custom-marker',
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
+    });
+};
 
 export const MapContainerComponent = (props) => {
 
@@ -99,7 +99,7 @@ export const MapContainerComponent = (props) => {
                         <Marker
                             key={ship.MMSI}
                             position={[ship.Latitude, ship.Longitude]}
-                            icon={shipIcon}
+                            icon={shipIcon(ship.Type)}
                             ref={data => {
 
                                 markerRefs.current[ship.MMSI] = data

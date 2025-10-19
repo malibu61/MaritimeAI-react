@@ -5,6 +5,8 @@ import Dashboard from "./pages/dashboard";
 import Layout from "./components/layout/Layout";
 import Login from "./pages/user/login"
 import Notfound from "./pages/notfound"
+import GeneralAnalyze from "./pages/generalanalyze";
+import NavtexAnalyze from "./pages/navtexanalyze";
 
 function App() {
     return (
@@ -18,6 +20,8 @@ function App() {
                                 <Route path="/" element={<Login/>}/>
                                 <Route path="/dashboard" element={<Layout><Dashboard/></Layout>}/>
                                 <Route path="/ships" element={<Layout><Ships/></Layout>}/>
+                                <Route path="/generalanalyze" element={<Layout><GeneralAnalyze/></Layout>}/>
+                                <Route path="/navtexanalyze" element={<Layout><NavtexAnalyze/></Layout>}/>
                                 <Route path="/login" element={<Login/>}/>
                                 <Route path="/logout" element={<Login/>}/>
                                 {/*<Route path="*" element={<Notfound/>}/>*/}

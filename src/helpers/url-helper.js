@@ -8,6 +8,10 @@ export const GET_CANAKKALE_STRAIT_SHIP_COUNT = "ships/canakkalestraitshipscount"
 export const GET_ISTANBUL_STRAIT_SHIP_COUNT = "ships/istanbulstraitshipscount"
 export const GET_CANAKKALE_STRAIT_AVG_SPEED = "ships/canakkalestraitshipsavgspeed"
 export const GET_ISTANBUL_STRAIT_AVG_SPEED = "ships/istanbulstraitshipsavgspeed"
+export const GET_ISTANBUL_STRAIT_AI_ANALYZE = "ai/istanbulstraitanalyze"
+export const GET_CANAKKALE_STRAIT_AI_ANALYZE = "ai/canakkalestraitanalyze"
+export const GET_ISTANBUL_STRAIT_NAVTEX_AI_ANALYZE = "ai/istanbulstraitnavtexanalyze"
+export const GET_CANAKKALE_STRAIT_NAVTEX_AI_ANALYZE = "ai/canakkalestraitnavtexanalyze"
 
 
 //User
