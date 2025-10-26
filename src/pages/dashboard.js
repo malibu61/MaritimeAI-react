@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react"
 import {Card, Col, Row, Statistic} from "antd";
 import {AlertOutlined, RadarChartOutlined, RiseOutlined, RocketOutlined,} from "@ant-design/icons";
 import * as signalR from "@microsoft/signalr";
+import CountUp from 'react-countup';
 
 const Dashboard = () => {
     const [southOfCanakkaleStrAllShipsCount, setSouthOfCanakkaleStrAllShipsCount] = useState(0)
@@ -26,16 +27,23 @@ const Dashboard = () => {
     const [middleOfIstanbulStrTankersAvgSpeed, setMiddleOfIstanbulStrTankersAvgSpeed] = useState(0)
     const [northOfIstanbulStrTankersAvgSpeed, setNorthOfIstanbulStrTankersAvgSpeed] = useState(0)
 
+    // CountUp
+    const formatter = (value) => <CountUp end={value} duration={1.5} separator="," />;
+    const formatterWithDecimals = (value) => (
+        <CountUp end={value} duration={1.5} separator="," decimals={2} />
+    );
+
     useEffect(() => {
         const connection = new signalR.HubConnectionBuilder()
-            .withUrl("https://localhost:7170/maritimehub")
+            // .withUrl("https://localhost:7170/maritimehub")
+            .withUrl("http://localhost:8080/maritimehub")
             .withAutomaticReconnect()
             .build();
 
         connection.start();
 
         connection.on("ReceiveDatas", (data) => {
-            console.log("📡 Gelen değer:", data);
+            console.log("Gelen değer:", data);
             setSouthOfCanakkaleStrAllShipsCount(data.southOfCanakkaleStrAllShipsCount);
             setNorthOfCanakkaleStrAllShipsCount(data.northOfCanakkaleStrAllShipsCount);
             setCanakkaleStraitTankersCount(data.canakkaleStraitTankersCount);
@@ -57,7 +65,6 @@ const Dashboard = () => {
             setSouthOfIstanbulStrTankersAvgSpeed(data.southOfIstanbulStrTankersAvgSpeed);
             setMiddleOfIstanbulStrTankersAvgSpeed(data.middleOfIstanbulStrTankersAvgSpeed);
             setNorthOfIstanbulStrTankersAvgSpeed(data.northOfIstanbulStrTankersAvgSpeed);
-
         });
 
         return () => {
@@ -65,9 +72,7 @@ const Dashboard = () => {
         };
     }, [])
 
-
     return (
-
         <React.Fragment>
             <div style={{padding: 40}}>
                 <div style={{
@@ -82,6 +87,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="Çanakkale Boğazı Güneyi Gemi Sayısı"
                                     value={southOfCanakkaleStrAllShipsCount}
+                                    formatter={formatter}
                                     prefix={<RadarChartOutlined style={{color: '#1890ff'}}/>}
                                     valueStyle={{color: '#1890ff'}}
                                 />
@@ -93,6 +99,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="Çanakkale Boğazı Kuzeyi Gemi Sayısı"
                                     value={northOfCanakkaleStrAllShipsCount}
+                                    formatter={formatter}
                                     prefix={<RiseOutlined style={{color: '#52c41a'}}/>}
                                     valueStyle={{color: '#52c41a'}}
                                 />
@@ -104,6 +111,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="Çanakkale Boğazı Tanker Sayısı"
                                     value={canakkaleStraitTankersCount}
+                                    formatter={formatter}
                                     prefix={
                                         canakkaleStraitTankersCount >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -120,6 +128,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="Çanakkale Boğazı Transit Sayısı"
                                     value={canakkaleStraitTransitShipsCount}
+                                    formatter={formatter}
                                     prefix={canakkaleStraitTransitShipsCount >= 10 ?
                                         <AlertOutlined style={{color: '#f50a0a'}}/>
                                         :
@@ -136,7 +145,7 @@ const Dashboard = () => {
                                     title="Çanakkale Boğazı Güneyi Ort. Hız"
                                     value={southOfCanakkaleStrAvgSpeed}
                                     suffix="Kts"
-                                    precision={2}
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         southOfCanakkaleStrAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -154,7 +163,7 @@ const Dashboard = () => {
                                     title="Çanakkale Boğazı Kuzeyi Ort. Hız"
                                     value={northOfCanakkaleStrAvgSpeed}
                                     suffix="Kts"
-                                    precision={2}
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         northOfCanakkaleStrAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -172,7 +181,7 @@ const Dashboard = () => {
                                     title="Çanakkale Boğazı Anlık Ortalama Hız"
                                     value={canakkaleStrAvgSpeed}
                                     suffix="Kts"
-                                    precision={2}
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         canakkaleStrAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -190,7 +199,7 @@ const Dashboard = () => {
                                     title="Çanakkale Boğazı Anlık Tanker Ortalama Hız"
                                     value={canakkaleStrTankersAvgSpeed}
                                     suffix="knot"
-                                    precision={2}
+                                    formatter={formatterWithDecimals}
                                     prefix={canakkaleStrTankersAvgSpeed >= 10 ?
                                         <AlertOutlined style={{color: '#f50a0a'}}/>
                                         :
@@ -199,10 +208,9 @@ const Dashboard = () => {
                                 />
                             </Card>
                         </Col>
-                        {/*3.satır*/}
-
                     </Row>
                 </div>
+
                 <div style={{
                     backgroundColor: '#b1d8fa',
                     padding: '20px',
@@ -215,6 +223,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="İstanbul Boğazı Güneyi Gemi Sayısı"
                                     value={southOfIstanbulStrAllShipsCount}
+                                    formatter={formatter}
                                     prefix={<RiseOutlined style={{color: '#52c41a'}}/>}
                                     valueStyle={{color: '#52c41a'}}
                                 />
@@ -226,6 +235,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="İstanbul Boğazı Orta Bölge Gemi Sayısı"
                                     value={middleOfIstanbulStrAllShipsCount}
+                                    formatter={formatter}
                                     prefix={<RiseOutlined style={{color: '#52c41a'}}/>}
                                     valueStyle={{color: '#fa8c16'}}
                                 />
@@ -237,19 +247,19 @@ const Dashboard = () => {
                                 <Statistic
                                     title="İstanbul Boğazı Kuzeyi Gemi Sayısı"
                                     value={northOfIstanbulStrAllShipsCount}
-                                    suffix="knot"
+                                    formatter={formatter}
                                     prefix={<RiseOutlined style={{color: '#52c41a'}}/>}
                                     valueStyle={{color: '#722ed1'}}
                                 />
                             </Card>
                         </Col>
 
-                        {/*4.satır*/}
                         <Col xs={12} sm={6}>
                             <Card>
                                 <Statistic
-                                    title="Çanakkale Boğazındaki Tanker Sayısı"
+                                    title="İstanbul Boğazındaki Tanker Sayısı"
                                     value={istanbulStraitTankersCount}
+                                    formatter={formatter}
                                     prefix={<RadarChartOutlined style={{color: '#1890ff'}}/>}
                                     valueStyle={{color: '#1890ff'}}
                                 />
@@ -262,7 +272,7 @@ const Dashboard = () => {
                                     title="İstanbul Boğazı Güneyi Ortalama Hız"
                                     value={southOfIstanbulStrAvgSpeed}
                                     suffix="Kts"
-                                    precision={2}
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         southOfIstanbulStrAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -279,8 +289,8 @@ const Dashboard = () => {
                                 <Statistic
                                     title="İstanbul Boğazı Orta Bölge Ortalama Hız"
                                     value={middleOfIstanbulStrAvgSpeed}
-                                    precision={2}
                                     suffix="Kts"
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         middleOfIstanbulStrAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -297,8 +307,8 @@ const Dashboard = () => {
                                 <Statistic
                                     title="İstanbul Boğazı Kuzeyi Ortalama Hız"
                                     value={northOfIstanbulStrAvgSpeed}
-                                    precision={2}
                                     suffix="Kts"
+                                    formatter={formatterWithDecimals}
                                     prefix={northOfIstanbulStrAvgSpeed >= 10 ?
                                         <AlertOutlined style={{color: '#f50a0a'}}/>
                                         :
@@ -308,14 +318,12 @@ const Dashboard = () => {
                             </Card>
                         </Col>
 
-                        {/*5.satır*/}
                         <Col xs={12} sm={6}>
                             <Card>
                                 <Statistic
-                                    title="İstanbul Boğazı Ort. Hız"
+                                    title="İstanbul Boğazı Transit Sayısı"
                                     value={istanbulStraitTransitShipsCount}
-                                    suffix="Kts"
-                                    precision={2}
+                                    formatter={formatter}
                                     prefix={
                                         istanbulStraitTransitShipsCount >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -330,10 +338,10 @@ const Dashboard = () => {
                         <Col xs={12} sm={6}>
                             <Card>
                                 <Statistic
-                                    title="İstanbul Boğazı Güney Tanker Ort. Hız"
+                                    title="İstanbul Boğazı Ortalama Hız"
                                     value={istanbulStrAvgSpeed}
                                     suffix="Kts"
-                                    precision={2}
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         istanbulStrAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -348,10 +356,10 @@ const Dashboard = () => {
                         <Col xs={12} sm={6}>
                             <Card>
                                 <Statistic
-                                    title="İstanbul Boğazı Anlık Tanker Ort. Hız"
+                                    title="İstanbul Boğazı Güney Tanker Ort. Hız"
                                     value={southOfIstanbulStrTankersAvgSpeed}
-                                    precision={2}
                                     suffix="knot"
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         southOfIstanbulStrTankersAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -368,8 +376,8 @@ const Dashboard = () => {
                                 <Statistic
                                     title="İstanbul Boğazı Orta Bölge Tanker Ort. Hız"
                                     value={middleOfIstanbulStrTankersAvgSpeed}
-                                    precision={2}
                                     suffix="Kts"
+                                    formatter={formatterWithDecimals}
                                     prefix={middleOfIstanbulStrTankersAvgSpeed >= 10 ?
                                         <AlertOutlined style={{color: '#f50a0a'}}/>
                                         :
@@ -385,7 +393,7 @@ const Dashboard = () => {
                                     title="İstanbul Boğazı Kuzeyi Tanker Ort. Hız"
                                     value={northOfIstanbulStrTankersAvgSpeed}
                                     suffix="Kts"
-                                    precision={2}
+                                    formatter={formatterWithDecimals}
                                     prefix={
                                         northOfIstanbulStrTankersAvgSpeed >= 10 ?
                                             <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -399,10 +407,8 @@ const Dashboard = () => {
                     </Row>
                 </div>
             </div>
-
         </React.Fragment>
     )
-
 }
 
 export default Dashboard;

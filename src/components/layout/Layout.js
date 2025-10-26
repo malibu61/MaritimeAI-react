@@ -1,16 +1,18 @@
-import {Layout as AntLayout, Menu, Typography, Button, message} from "antd"
+import {Button, Layout as AntLayout, Menu, message, Typography} from "antd"
 import {
     DashboardOutlined,
-    ShopOutlined,
+    FundOutlined,
     LeftOutlined,
-    RightOutlined, LogoutOutlined
+    LogoutOutlined,
+    RadarChartOutlined,
+    RightOutlined,
+    RocketOutlined
 } from "@ant-design/icons"
 
 import {logoutService} from "../../services/login"
 
 import {useLocation, useNavigate} from "react-router-dom";
 import React, {useEffect, useState} from "react";
-import GeneralAnalyze from "../../pages/generalanalyze";
 
 const {Title} = Typography;
 
@@ -85,17 +87,17 @@ const Layout = ({children}) => {
         },
         {
             key: "/ships",
-            icon: <ShopOutlined/>,
+            icon: <RocketOutlined/>,
             label: "Gemiler"
         },
         {
             key: "/generalanalyze",
-            icon: <ShopOutlined/>,
+            icon: <FundOutlined/>,
             label: "Genel AI Analiz"
         },
         {
             key: "/navtexanalyze",
-            icon: <ShopOutlined/>,
+            icon: <RadarChartOutlined/>,
             label: "NAVTEX AI Analiz"
         },
         {
@@ -104,16 +106,15 @@ const Layout = ({children}) => {
             label: "Çıkış Yap"
         }
     ]
-
     return (
         <>
             {contextHolder}
 
-            <AntLayout style={{ minHeight: '100vh' }}>
+            <AntLayout style={{minHeight: '100vh'}}>
                 <Sider
                     collapsed={collapseSider}
                     trigger={null}
-                    style={{ height: "100vh", position: "fixed", overflow: "auto" }}
+                    style={{height: "100vh", position: "fixed", overflow: "auto"}}
                 >
                     <div style={{height: '64px', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
 
@@ -157,7 +158,7 @@ const Layout = ({children}) => {
                     <Header
                         style={{
                             padding: '0 24px',
-                            marginTop:-20,
+                            marginTop: -20,
                             background: '#fff',
                             display: 'flex',
                             alignItems: 'center',

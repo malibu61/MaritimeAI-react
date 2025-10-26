@@ -15,8 +15,9 @@ function App() {
                 <div className="app-content">
                     <Router>
 
-                        {localStorage.getItem("token") ?
-                            (<Routes>
+                        {/*{localStorage.getItem("token") ?*/}
+                        {/*    (*/}
+                        <Routes>
                                 <Route path="/" element={<Login/>}/>
                                 <Route path="/dashboard" element={<Layout><Dashboard/></Layout>}/>
                                 <Route path="/ships" element={<Layout><Ships/></Layout>}/>
@@ -25,15 +26,17 @@ function App() {
                                 <Route path="/login" element={<Login/>}/>
                                 <Route path="/logout" element={<Login/>}/>
                                 {/*<Route path="*" element={<Notfound/>}/>*/}
-                            </Routes>)
-                            :
-                            (<Routes>
+                            </Routes>
+                        {/*)*/}
+                        {/*    :*/}
+                        {/*    (*/}
+                        <Routes>
                                 <Route path="/" element={<Login/>}/>
                                 <Route path="/login" element={<Login/>}/>
                                 <Route path="/logout" element={<Login/>}/>
                                 {/*<Route path="*" element={<Notfound/>}/>*/}
-                            </Routes>)
-                        }
+                            </Routes>
+                        {/*)*/}
 
                     </Router>
 

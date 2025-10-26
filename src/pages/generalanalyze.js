@@ -54,13 +54,41 @@ const GeneralAnalyze = () => {
                     from { transform: rotate(0deg); }
                     to { transform: rotate(360deg); }
                 }
+                
+                .markdown-content h2 {
+                    color: #1890ff;
+                    font-size: 16px;
+                    margin-top: 20px;
+                    margin-bottom: 10px;
+                    font-weight: 600;
+                }
+                
+                .markdown-content ul {
+                    line-height: 1.8;
+                }
+                
+                .markdown-content li {
+                    margin-bottom: 8px;
+                }
+                
+                .markdown-content strong {
+                    color: #262626;
+                }
             `}</style>
 
             <div style={{padding: 40}}>
                 <Row gutter={24}>
                     <Col md={12}>
                         <Card>
-                            <h1>Çanakkale Boğazı AI Analiz</h1>
+                            <div style={{
+                                fontSize: 22,
+                                fontWeight: 'bold',
+                                color: '#1890ff',
+                                marginBottom: 20,
+                                paddingBottom: 15,
+                                borderBottom: '3px solid #1890ff'
+                            }}>Çanakkale Boğazı AI Analiz
+                            </div>
                             {canakkaleLoading ? (<div style={{
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -71,16 +99,24 @@ const GeneralAnalyze = () => {
                             }}>
                                 <IconSpinner/>
                                 <div style={{color: '#1890ff', fontSize: 16}}>
-                                   Çanakkale Genel AI Analiz yükleniyor...
+                                    Çanakkale Genel AI Analiz yükleniyor...
                                 </div>
-                            </div>) : (<div style={{textAlign: 'left'}}>
+                            </div>) : (<div className="markdown-content" style={{textAlign: 'left'}}>
                                 <ReactMarkdown>{canakkaleStraitAiAnalyze}</ReactMarkdown>
                             </div>)}
                         </Card>
                     </Col>
                     <Col md={12}>
                         <Card>
-                            <h1>İstanbul Boğazı AI Analiz</h1>
+                            <div style={{
+                                fontSize: 22,
+                                fontWeight: 'bold',
+                                color: '#1890ff',
+                                marginBottom: 20,
+                                paddingBottom: 15,
+                                borderBottom: '3px solid #1890ff'
+                            }}>İstanbul Boğazı AI Analiz
+                            </div>
                             {istanbulLoading ? (<div style={{
                                 display: 'flex',
                                 flexDirection: 'column',
@@ -93,7 +129,7 @@ const GeneralAnalyze = () => {
                                 <div style={{color: '#1890ff', fontSize: 16}}>
                                     İstanbul Genel AI Analiz yükleniyor...
                                 </div>
-                            </div>) : (<div style={{textAlign: 'left'}}>
+                            </div>) : (<div className="markdown-content" style={{textAlign: 'left'}}>
                                 <ReactMarkdown>{istanbulStraitAiAnalyze}</ReactMarkdown>
                             </div>)}
                         </Card>
