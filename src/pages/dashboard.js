@@ -198,7 +198,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="Çanakkale Boğazı Anlık Tanker Ortalama Hız"
                                     value={canakkaleStrTankersAvgSpeed}
-                                    suffix="knot"
+                                    suffix="Kts"
                                     formatter={formatterWithDecimals}
                                     prefix={canakkaleStrTankersAvgSpeed >= 10 ?
                                         <AlertOutlined style={{color: '#f50a0a'}}/>
@@ -358,7 +358,7 @@ const Dashboard = () => {
                                 <Statistic
                                     title="İstanbul Boğazı Güney Tanker Ort. Hız"
                                     value={southOfIstanbulStrTankersAvgSpeed}
-                                    suffix="knot"
+                                    suffix="Kts"
                                     formatter={formatterWithDecimals}
                                     prefix={
                                         southOfIstanbulStrTankersAvgSpeed >= 10 ?

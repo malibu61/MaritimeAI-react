@@ -30,8 +30,6 @@ const LoginDrawer = (props) => {
                         ),
                         duration: 3
                     })
-
-
                     setTimeout(() => {
                         setIsLoginDrawerOpen(false);
                         navigate("/dashboard")

@@ -186,7 +186,7 @@ const Layout = ({children}) => {
                         />
 
                         <Title level={4} style={{margin: '0 0 0 16px', color: '#1890ff'}}>
-                            Türkiye Çevresi Deniz Trafiği Haritası
+                            Türkiye Çevresi Deniz Trafiği Analizi
                         </Title>
                     </Header>
 

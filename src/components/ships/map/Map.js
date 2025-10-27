@@ -18,7 +18,7 @@ const shipIcon = (shipType) => {
 export const MapContainerComponent = (props) => {
 
     const {ships, markerRefs, mapRef,setShips} = props
-    const getAllShips = (body) =>{
+    const getAllShips = (body) => {
         getAllShipsService({
             minLat: body.minLat,
             maxLat: body.maxLat,
@@ -27,8 +27,15 @@ export const MapContainerComponent = (props) => {
             zoom: body.zoom
         }).then((res) => {
             console.log("res: ", res)
-            console.log("res: ", res.message)
-            setShips(res)
+            // Eğer res direkt array ise:
+            if (Array.isArray(res)) {
+                setShips(res)
+            } else {
+                setShips([])  // Hata durumunda boş array
+            }
+        }).catch((err) => {
+            console.error("Veri çekme hatası:", err)
+            setShips([])  // Hata durumunda boş array
         })
     }
 
