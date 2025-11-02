@@ -1,70 +1,192 @@
-# Getting Started with Create React App
+**TR**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Herkese merhaba,
 
-## Available Scripts
+Murat Yücedağ hocamın Udemy’deki yapay zeka entegrasyon videolarından ilham alarak geliştirdiğim
+en yeni full-stack projemi paylaşmaktan heyecan duyuyorum.
 
-In the project directory, you can run:
+🚢 Proje: MaritimeAI – Yapay Zeka Destekli Denizcilik Takip Sistemi
 
-### `npm start`
+Backend tarafında .NET Core, frontend tarafında React.js kullanarak geliştirilen bu proje,
+yapay zeka destekli gemi takibi ve veri analizi sağlıyor.
+Tüm servisler Docker konteynerleri içinde izole edilerek çalışıyor —
+backend API, frontend ve Redis cache servisleri ayrı konteynerlerde yapılandırıldı.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+🎯 Proje Amacı
+VTS (Vessel Traffic Service) operatörlerine yapay zeka destekli karar destek sistemi sunarak,
+İstanbul ve Çanakkale Boğazları’ndaki deniz trafiğinin güvenliğini ve verimliliğini artırmak.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+⚙️ Backend – .NET Core
 
-### `npm test`
+• Modüler çok katmanlı mimari
+• Repository Pattern ve Dependency Injection
+• MSSQL + Entity Framework Core (EF Core)
+• SignalR ile anlık veri akışı
+• Redis (Docker konteyneri olarak) ile 30 saniyelik cache mekanizması, yapay zeka analiz sonuçlarını hızlıca sunuyor
+• Asenkron programlama ve JWT tabanlı kimlik doğrulama
+• Gemini 2.0 Flash AI entegrasyonu
+• API dökümantasyonu için Swagger, Postman araçları
+• Logging için ILogger entegrasyonu
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+🎨 Frontend – React.js
 
-### `npm run build`
+• Modern ve bileşen tabanlı arayüz
+• SignalR client ile gerçek zamanlı veri
+• Axios ile API iletişimi
+• Leaflet.js harita entegrasyonu
+• Ant Design (AntD) ve React Hooks
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**EN**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Hello everyone,
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+I’m excited to share my latest full-stack project, developed with inspiration from Murat Yücedağ’s Udemy videos on AI integration.
 
-## Learn More
+🚢 Project: MaritimeAI – AI-Powered Maritime Monitoring System
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Built with .NET Core on the backend and React.js on the frontend, this project provides AI-powered vessel tracking and data analysis.
+All services are isolated within Docker containers — the backend API, frontend, and Redis cache are configured as separate containers.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+🎯 Project Goal
+To provide VTS (Vessel Traffic Service) operators with an AI-driven decision support system,
+improving the safety and efficiency of maritime traffic in the Istanbul and Çanakkale Straits.
 
-### Code Splitting
+⚙️ Backend – .NET Core
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+• Modular multi-layered architecture
+• Repository Pattern and Dependency Injection
+• MSSQL + Entity Framework Core (EF Core)
+• Real-time updates via SignalR
+• Redis (as a Docker container) for a 30-second cache mechanism, delivering AI analysis results quickly
+• Asynchronous programming and JWT-based authentication
+• Gemini 2.0 Flash AI integration
+• Swagger & Postman for API documentation
+• Logging with ILogger
 
-### Analyzing the Bundle Size
+🎨 Frontend – React.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+• Modern, component-based UI
+• Real-time updates via SignalR client
+• API communication with Axios
+• Leaflet.js map integration
+• Ant Design (AntD) and React Hooks
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+![01](https://github.com/user-attachments/assets/7920a159-be3d-4caf-9a06-ec17386a6a4c)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+![02](https://github.com/user-attachments/assets/0bccc83e-00fe-4d24-86d6-5b150a17863e)
+
+
+
+
+
+
+
+
+
+![03](https://github.com/user-attachments/assets/05f9cf6b-90b3-423f-bab7-dac0593bd236)
+
+
+
+
+
+
+
+
+
+![04](https://github.com/user-attachments/assets/99954239-331f-4105-a683-96d0851eb3f0)
+
+
+
+
+
+
+
+
+
+![05](https://github.com/user-attachments/assets/132743b8-ea94-40d9-a464-fc390af6457a)
+
+
+
+
+
+
+
+
+
+![05 1](https://github.com/user-attachments/assets/dcbd6130-2614-4140-ae63-410cba6adcc5)
+
+
+
+
+
+
+
+
+
+![06](https://github.com/user-attachments/assets/0a419069-35e0-4aca-95a1-c1982f9f39b3)
+
+
+
+
+
+
+
+
+
+![07](https://github.com/user-attachments/assets/5198a53e-7c4c-44d0-a365-0c22368a4677)
+
+
+
+
+
+
+
+
+
+![08](https://github.com/user-attachments/assets/ee775c52-3021-45a3-be36-46b8cc5fbc6f)
+
+
+
+
+
+
+
+
+
+<img width="1346" height="1771" alt="09" src="https://github.com/user-attachments/assets/f3b610c9-8f51-4cfa-bd46-baf589da2ea2" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
