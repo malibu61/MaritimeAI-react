@@ -36,9 +36,6 @@ const Layout = ({children}) => {
                 localStorage.removeItem("token")
                 localStorage.removeItem("user")
 
-                console.log("response: ", response)
-
-
                 messageApi.info(({
                     content: (
                         <>
@@ -49,7 +46,8 @@ const Layout = ({children}) => {
                 }))
 
                 setTimeout(() => {
-                    navigate("/login")
+                    // navigate("/login")
+                    window.location.href = "/login";
                 }, 2000)
 
 
@@ -140,7 +138,6 @@ const Layout = ({children}) => {
                         onClick={({key}) => {
 
                             if (key == "/logout") {
-                                console.log("girdk")
                                 handleLogout()
                             } else {
                                 navigate(key)

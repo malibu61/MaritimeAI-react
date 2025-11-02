@@ -42,7 +42,8 @@ const RegisterDrawer = (props) => {
                                 }));
 
                                 setIsRegisterDrawerOpen(false);
-                                navigate("/dashboard")
+                                // navigate("/dashboard")
+                                window.location.href ="/dashboard"
                             }
                         });
                     }, 1000)

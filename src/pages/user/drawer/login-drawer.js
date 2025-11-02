@@ -32,7 +32,8 @@ const LoginDrawer = (props) => {
                     })
                     setTimeout(() => {
                         setIsLoginDrawerOpen(false);
-                        navigate("/dashboard")
+                        // navigate("/dashboard")
+                        window.location.href = "/dashboard";
                     }, 2000)
 
                 } else {

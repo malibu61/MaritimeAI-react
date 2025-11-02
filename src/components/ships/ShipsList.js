@@ -1,6 +1,20 @@
 import React, {useState} from "react"
-import {Button, Card, Col, Input, Row, Tag} from "antd";
-import {SearchOutlined} from "@ant-design/icons";
+import {Button, Card, Col, Input, Row, Tag, Space, Divider} from "antd";
+import {SearchOutlined, CompassOutlined, AimOutlined} from "@ant-design/icons";
+
+const ShipTypeInfo = {
+    0: {name: "Other", color: "blue"},
+    1: {name: "Wing In Ground", color: "purple"},
+    2: {name: "Towing", color: "green"},
+    3: {name: "Port Tender", color: "orange"},
+    4: {name: "High Speed Craft", color: "volcano"},
+    5: {name: "Diving", color: "lime"},
+    6: {name: "Passenger", color: "geekblue"},
+    7: {name: "Cargo", color: "magenta"},
+    8: {name: "Tanker", color: "red"},
+    9: {name: "Pleasure Craft", color: "yellow"},
+    10: {name: "Fishing", color: "gold"}
+}
 
 const ShipListComponent = (props) => {
 
@@ -13,73 +27,121 @@ const ShipListComponent = (props) => {
 
     return (
         <React.Fragment>
+            <Space direction="vertical" style={{width: '100%'}} size="middle">
+                <div>
+                    <Input
+                        size="large"
+                        placeholder="Gemi adına göre ara..."
+                        prefix={<SearchOutlined style={{color: '#1890ff'}}/>}
+                        value={searchText}
+                        onChange={(e) => setSearchText(e.target.value)}
+                        allowClear
+                        style={{borderRadius: 8}}
+                    />
+                </div>
 
-            <Input
-                placeholder="Gemi Ara"
-                prefix={<SearchOutlined />}
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-                allowClear
-            />
-
-            <div style={{
-                height: '570px',
-                overflowY: 'auto',
-            }}>
-
-                {filteredShips.length > 0 ? (
-
-                    filteredShips.map((ship, index) => (
-                        <Card.Grid style={{
-                            height: "170px",
-                            width: "100%",
-                            margin: "8px 0",
-                            backgroundColor: '#D3F2F5',
-                            borderRadius: 10
-                        }}>
-
-                            <Row key={ship.MMSI}>
-                                <Col span={10}>
-                                    <div style={{textAlign: "justify"}}>
-                                        <p><strong>Gemi Adı:</strong><Tag color="warning">{ship.Name}</Tag></p>
-                                        <p><strong>MMSI:</strong> {ship.MMSI}</p>
-                                        <p><strong>Enlem:</strong> {ship.Latitude} K</p>
-                                    </div>
-                                </Col>
-                                <Col span={9}>
-                                    <div style={{textAlign: "justify"}}>
-                                        <p><strong>Boylam:</strong> {ship.Longitude} D</p>
-                                        <p><strong>Sürat:</strong> {ship.Speed} KTS</p>
-                                        <p><strong>Rota:</strong> {ship.Course}° </p>
-                                    </div>
-                                </Col>
-                                <Col span={5} style={{display: "flex"}}>
-                                    <Button
-                                        style={{
-                                            width: "100%",
-                                            height: "100%",
-                                            backgroundColor: "#2e86de",
-                                            color: "white"
-                                        }}
-                                        onClick={() => {
-                                            goToShip(ship)
+                <div style={{
+                    height: '520px',
+                    overflowY: 'auto',
+                    paddingRight: 8
+                }}>
+                    {filteredShips.length > 0 ? (
+                        <Space direction="vertical" style={{width: '100%'}} size="small">
+                            {filteredShips.map((ship) => (
+                                <Card
+                                    key={ship.MMSI}
+                                    hoverable
+                                    style={{
+                                        borderRadius: 12,
+                                        border: '1px solid #e8e8e8',
+                                        transition: 'all 0.3s ease',
+                                    }}
+                                    bodyStyle={{padding: 16}}
+                                >
+                                    <div style={{marginBottom: 12}}>
+                                        <Row justify="space-between" align="middle">
+                                            <Col>
+                                                <Space>
+                                                    <Tag color={ShipTypeInfo[ship.Type]?.color || "default"}>
+                                                        {ShipTypeInfo[ship.Type]?.name || "Bilinmiyor"}
+                                                    </Tag>
+                                                    <strong style={{fontSize: 15, color: '#1890ff'}}>
+                                                        {ship.Name}
+                                                    </strong>
+                                                </Space>
+                                            </Col>
+                                        </Row>
+                                        <div style={{
+                                            fontSize: 12,
+                                            color: '#999',
+                                            marginTop: 4
                                         }}>
-                                        Gemiye Git
-                                    < /Button>
-                                </Col>
-                            </Row>
-                        </Card.Grid>
-                    ))
-                ) : (
-                    <div style={{textAlign: 'center', marginTop: '20px', color: '#999'}}>
-                        Gemi bulunamadı
-                    </div>
-                )}
-            </div>
+                                            MMSI: {ship.MMSI}
+                                        </div>
+                                    </div>
 
+                                    <Divider style={{margin: '12px 0'}}/>
+
+                                    {/* Gemi Bilgileri */}
+                                    <Row gutter={[16, 8]} style={{marginBottom: 12}}>
+                                        <Col span={12}>
+                                            <div style={{fontSize: 12, color: '#666'}}>
+                                                Pozisyon
+                                            </div>
+                                            <div style={{fontSize: 13, marginTop: 4}}>
+                                                <div>{ship.Latitude.toFixed(4)}° K</div>
+                                                <div>{ship.Longitude.toFixed(4)}° D</div>
+                                            </div>
+                                        </Col>
+                                        <Col span={12}>
+                                            <div style={{fontSize: 12, color: '#666'}}>
+                                                Rota/Sürat
+                                            </div>
+                                            <div style={{fontSize: 13, marginTop: 4}}>
+                                                <div>
+                                                    <CompassOutlined/> {ship.Speed} KTS
+                                                </div>
+                                                <div>
+                                                    <AimOutlined/> {ship.Course}°
+                                                </div>
+                                            </div>
+                                        </Col>
+                                    </Row>
+
+                                    <Button
+                                        type="primary"
+                                        block
+                                        size="middle"
+                                        icon={<AimOutlined/>}
+                                        style={{
+                                            borderRadius: 8,
+                                            height: 38,
+                                            fontWeight: 500
+                                        }}
+                                        onClick={() => goToShip(ship)}
+                                    >
+                                        Haritada Göster
+                                    </Button>
+                                </Card>
+                            ))}
+                        </Space>
+                    ) : (
+                        <div style={{
+                            textAlign: 'center',
+                            marginTop: 100,
+                            color: '#999'
+                        }}>
+                            <SearchOutlined style={{fontSize: 48, marginBottom: 16}}/>
+                            <div style={{fontSize: 16}}>Gemi bulunamadı</div>
+                            <div style={{fontSize: 13, marginTop: 8}}>
+                                Farklı bir arama yapın
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </Space>
         </React.Fragment>
     )
-
 }
 
 export default ShipListComponent

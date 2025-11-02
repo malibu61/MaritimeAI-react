@@ -114,18 +114,39 @@ export const MapContainerComponent = (props) => {
                             }}
 
                         >
+                            <Popup style={{width: 500}}>
+                                <div style={{
+                                    fontFamily: 'Arial, sans-serif',
+                                    fontSize: '13px',
+                                    lineHeight: '1.6'
+                                }}>
+                                    <h4 style={{
+                                        margin: '0 0 10px 0',
+                                        fontSize: '15px',
+                                        color: '#2c3e50',
+                                        borderBottom: '2px solid #3498db',
+                                        paddingBottom: '5px'
+                                    }}>
+                                        {ship.Name}
+                                    </h4>
 
-                            <Popup
-                                style={{width: 500}}>
-                                <div>
-                                    <p><strong>Gemi Adı:</strong> {ship.Name}</p>
-                                    <p><strong>MMSI:</strong> {ship.MMSI}</p>
-                                    <p><strong>Enlem:</strong> {ship.Latitude} K</p>
-                                    <p><strong>Boylam:</strong> {ship.Longitude} D</p>
-                                    <p><strong>Sürat:</strong> {ship.Speed} KTS</p>
-                                    <p><strong>Rota:</strong> {ship.Course}° </p>
+                                    <div style={{display: 'grid', gridTemplateColumns: '80px 1fr', gap: '6px'}}>
+                                        <span style={{color: '#7f8c8d', fontWeight: '500'}}>MMSI:</span>
+                                        <span>{ship.MMSI}</span>
+
+                                        <span style={{color: '#7f8c8d', fontWeight: '500'}}>Enlem:</span>
+                                        <span>{ship.Latitude}° K</span>
+
+                                        <span style={{color: '#7f8c8d', fontWeight: '500'}}>Boylam:</span>
+                                        <span>{ship.Longitude}° D</span>
+
+                                        <span style={{color: '#7f8c8d', fontWeight: '500'}}>Sürat:</span>
+                                        <span>{ship.Speed} KTS</span>
+
+                                        <span style={{color: '#7f8c8d', fontWeight: '500'}}>Rota:</span>
+                                        <span>{ship.Course}°</span>
+                                    </div>
                                 </div>
-
                             </Popup>
 
                         </Marker>
